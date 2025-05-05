@@ -4,16 +4,37 @@
 ## Overview and installation
 This is my custom config files for Arch based Hyprland setup using Nord theme. 
 
-Installation is currently manual, bash script will be released later.
-
-Before installation, you need to install Arch with needed graphic drivers. Then clone this repository, manually install all packages and copy config files to folders. 
+Installation is manual. Before installation, you need to install Arch with needed graphic drivers (for Nvidia see below). Then clone this repository, manually install all packages and copy config files to folders. 
 
 ## Needed packages
 ```
-sudo pacman -S hyprland kitty dolphin dolphin-plugins code firefox rofi-wayland pavucontrol waybar chromium pulseaudio qt5ct qt6ct qt5-wayland qt6-wayland kvantum cliphist xdg-desktop-portal-hyprland archlinux-xdg-menu sddm xorg nwg-look ark nm-connection-editor libnotify dunst pipewire wireplumber hyprpolkitagent unzip playerctl uwsm
+sudo pacman -S hyprland kitty dolphin dolphin-plugins kia-admin code firefox rofi-wayland pavucontrol waybar chromium pulseaudio qt5ct qt6ct qt5-wayland qt6-wayland kvantum cliphist xdg-desktop-portal-hyprland archlinux-xdg-menu sddm xorg nwg-look ark nm-connection-editor libnotify dunst pipewire wireplumber hyprpolkitagent unzip playerctl uwsm hyprpaper hyprlock
 
-yay -S oh-my-posh hyprshot hyprcursors Nordzy-cursors Nordzy-hyprcursors wlogout
+yay -S oh-my-posh hyprshot hyprcursors Nordzy-cursors Nordzy-hyprcursors wlogout xwaylandvideobridge
 ```
+
+## Nvidia
+
+For detailed explanation see [Hyprland wiki](https://wiki.hyprland.org/Nvidia/) on this topic.
+
+```
+sudo pacman -S nvidia-open-dkms nvidia-utils lib32-nvidia-utils egl-wayland nvidia-settings
+```
+
+In `~/.config/hypr/hyprland.conf` add environmental variables:
+```
+env = LIBVA_DRIVER_NAME,nvidia
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+env = ELECTRON_OZONE_PLATFORM_HINT,auto
+```
+
+In `/etc/mkinitcpio.conf` add to modules:
+```
+MODULES=(... nvidia nvidia_modeset nvidia_uvm nvidia_drm ...)
+```
+
+After that run `sudo mkinitcpio -P` and reboot
+
 
 ## Fonts
 ```
@@ -27,8 +48,9 @@ Enabling:
 Creating autologin in SDDM:
 Change in /usr/lib/sddm/sddm.conf.d/default.conf `Session=` to `Session=hyprland-uwsm` and `User=` to `User=USER_NAME`
 
+
 ## Folders and files to copy
-Copy config files from repository to theese locations:
+Copy config files from repository to these locations:
 - ~/.themes
 - ~/.config/dolphinrc
 - ~/.config/gwenviewrc
