@@ -8,7 +8,7 @@ Installation is manual. Before installation, you need to install Arch with neede
 
 ## Needed packages
 ```
-sudo pacman -S hyprland kitty dolphin dolphin-plugins kia-admin code firefox rofi-wayland pavucontrol waybar chromium pulseaudio qt5ct qt6ct qt5-wayland qt6-wayland kvantum cliphist xdg-desktop-portal-hyprland archlinux-xdg-menu sddm xorg nwg-look ark nm-connection-editor libnotify dunst pipewire wireplumber hyprpolkitagent unzip playerctl uwsm hyprpaper hyprlock
+sudo pacman -S hyprland kitty dolphin dolphin-plugins kia-admin code firefox rofi-wayland pavucontrol waybar chromium qt5ct qt6ct qt5-wayland qt6-wayland kvantum cliphist xdg-desktop-portal-hyprland archlinux-xdg-menu sddm xorg nwg-look ark nm-connection-editor libnotify dunst pipewire wireplumber pipewire-pulse hyprpolkitagent unzip playerctl uwsm hyprpaper hyprlock
 
 yay -S oh-my-posh hyprshot hyprcursors Nordzy-cursors Nordzy-hyprcursors wlogout xwaylandvideobridge
 ```
