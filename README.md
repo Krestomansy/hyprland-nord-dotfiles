@@ -71,7 +71,7 @@ Copy config files from repository to these locations:
 2. Nord icons folder: copy existing breeze folder from /usr/share/icons to the same folder with different name -> сopy icons to this folder replacing files -> add theme to ~/.config/kdeglobals
 
 ## Enabling oh-my-posh config 
-*(it is already done in provided .bashrc and bash.bashrc files)*
+*(it is already done in provided .bashrc and bash.bashrc files, you only need to change to your username in bash.bashrc file)*
 ```
 echo "eval \"\$(oh-my-posh init bash --config ~/.config/oh-my-posh/nordtron.omp.json\"" >> ~/.bashrc
 echo "eval \"\$(oh-my-posh init bash --config home/${username}/.config/oh-my-posh/nordtron-root.omp.json\"" >> /etc/bash.bashrc
