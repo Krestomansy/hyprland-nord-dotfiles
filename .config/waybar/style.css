@@ -20,11 +20,13 @@
 }
 
 /* Each module */
+#cpu,
+#memory,
+#custom-gpu-usage,
+#custom-notification,
 #battery,
 #clock,
-#cpu,
 #custom-keyboard-layout,
-#memory,
 #mode,
 #network,
 #pulseaudio,
@@ -48,11 +50,26 @@
   font-weight: bold;
 }
 
+tooltip {
+  font-weight: bold;
+  font-family: JetBrainsMono Nerd Font;
+  background: rgba(46, 52, 64, 0.95);
+}
+
+tooltip label {
+  color: #D8DEE9;
+}
+
+
 #cpu {
-  min-width:  50px;
+  min-width:  55px;
 }
 
 #memory {
+  min-width:  55px;
+}
+
+#custom-gpu-usage {
   min-width:  55px;
 }
 
@@ -66,10 +83,6 @@
 
 #pulseaudio.muted {
   /* No additional styles */
-}
-
-#tray {
-  margin-right: 10px;
 }
 
 #window {
@@ -97,4 +110,10 @@ button:hover {
   background-color: #4C566A; /* Nord 2 (Frost) */
 }
 
+#custom-power,
+#network,
+#language,
+#custom-notification {
+  min-width:  30px;
+}
 
