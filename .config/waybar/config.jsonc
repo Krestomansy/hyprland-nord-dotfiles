@@ -3,6 +3,9 @@
   "height": 28,
   "spacing": 4, // Gaps between modules (4px)
   "modules-left": [
+    "cpu",
+    "custom/gpu-usage",
+    "memory",
     "hyprland/workspaces",
     "hyprland/submap"
   ],
@@ -13,22 +16,42 @@
   "modules-right": [
     "hyprland/language",
     "network",
+    "bluetooth",
     "pulseaudio",
-    "cpu",
-    "memory",
     "tray",
+    "custom/notification",
     "clock",
     "custom/power"
   ],
 
   "clock": {
   "interval": 30,
-  "format": "{:%H:%M}",
-  "tooltip-format": "{:%a, %d %b %G}"
+  "format": "{:%d.%m | %H:%M}",
+  "tooltip-format": "<span size='9pt' font='JetBrainsMono Nerd Font'><big>{calendar}</big></span>",
+  "calendar": {
+            "mode"          : "months",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "format": {
+                      "months":     "<span color='#d8dee9'><b>{}</b></span>",
+                      "days":       "<span color='#d8dee9'><b>{}</b></span>",
+                      "weeks":      "<span color='#88c0d0'><b>W{}</b></span>",
+                      "weekdays":   "<span color='#88c0d0'><b>{}</b></span>",
+                      "today":      "<span color='#a3be8c'><b><u>{}</u></b></span>"
+                      }
+            },
+  "actions":  {
+              "on-click-right": "mode",
+              "on-scroll-up": "shift_up",
+              "on-scroll-down": "shift_down",
+              "on-click-middle": "shift_reset"
+              },
+  "on-click": "gnome-calendar"
   },
 
   "hyprland/window": {
-    "max-length": 30
+    "max-length": 50
   },
   
   "hyprland/language": {
@@ -43,8 +66,7 @@
 
   "cpu": {
     "interval": 2,
-    "format": "{usage}% ",
-    "tooltip": false
+    "format": "{usage}% "
   },
 
   "memory": {
@@ -75,16 +97,64 @@
     "max-length": 32
   },
 
+  "bluetooth": {
+    "format": " {status}",
+    // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+    "format-disabled": "",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click-right": "blueman-manager",
+    "max-length": 32
+  },
+
   "hyprland/workspaces": {
     "format": "{icon}",
     "on-click": "activate",
     "sort-by-number": true
   },
 
+  "custom/gpu-usage": {
+    "format": "{}% {icon}",
+    "format-icons": "󰾲",
+    "on-click": "nvidia-settings", // will required nvidia-settings installed as well, comes with the driver by default.
+    "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+    "interval": 2
+  },
+
   "custom/power": {
     "format" : "⏻ ",
     "tooltip": false,
     "on-click": "wlogout -b 5"
+  },
+
+  "custom/notification": {
+    "tooltip-format": "ЛКМ: Уведомления\nПКМ: Не беспокоить",
+    "format": "{icon}",
+    "format-icons": {
+      "notification":
+        "<span rise='8pt'>  <span foreground='red'><sup></sup></span></span>",
+      "none": "  ",
+      "dnd-notification":
+        "<span rise='8pt'>  <span foreground='red'><sup></sup></span></span>",
+      "dnd-none": " ",
+      "inhibited-notification":
+        "<span rise='8pt'>  <span foreground='red'><sup></sup></span></span>",
+      "inhibited-none": "  ",
+      "dnd-inhibited-notification":
+        "<span rise='8pt'> <span foreground='red'><sup></sup></span></span>",
+      "dnd-inhibited-none": " "
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   }
 }
 
